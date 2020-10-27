@@ -5,7 +5,7 @@
     <groupId>com.mall</groupId>
     <artifactId>mall</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>gulimall</name>
+    <name>mall</name>
     <description>聚合服务</description>
     <packaging>pom</packaging>
 
@@ -15,6 +15,7 @@
         <module>mall-order</module>
         <module>mall-product</module>
         <module>mall-ware</module>
+        <module>renren-fast</module>
     </modules>
 
 
