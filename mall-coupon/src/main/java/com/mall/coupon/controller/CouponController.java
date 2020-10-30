@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import com.mall.common.utils.R;
  * @email 18460365733@163.com
  * @date 2020-10-30 14:21:37
  */
+@RefreshScope // 动态获取并刷新配置
 @RestController
 @RequestMapping("coupon/coupon")
 public class CouponController {

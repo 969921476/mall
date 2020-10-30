@@ -10,7 +10,7 @@
     <description>公共类</description>
 
     <dependencies>
-        <!--        mybatis-plus-->
+        <!-- mybatis-plus-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>

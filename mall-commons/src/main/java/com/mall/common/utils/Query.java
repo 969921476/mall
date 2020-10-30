@@ -8,10 +8,10 @@
 
 package com.mall.common.utils;
 
-import com.atguigu.common.xss.SQLFilter;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mall.common.xss.SQLFilter;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.Map;
@@ -40,7 +40,7 @@ public class Query<T> {
         }
 
         //分页对象
-        Page<T> page = new Page<>(curPage, limit);
+        Page<T> page = new Page<T>(curPage, limit);
 
         //分页参数
         params.put(Constant.PAGE, page);
