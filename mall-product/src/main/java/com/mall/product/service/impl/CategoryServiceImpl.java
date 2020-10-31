@@ -37,13 +37,13 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
 
         // 组成树形结构
         // 将获取的集合转换成stream流过滤ParentCid等于0的进行返回，并映射该项的children属性 并进行排序
-        categories.stream().filter(item -> item.getParentCid() == 0).map(menu -> {
+        List<CategoryEntity> collect = categories.stream().filter(item -> item.getParentCid() == 0).map(menu -> {
             menu.setChildren(getChildren(menu, categories));
             return menu;
         }).sorted((menu1, menu2) -> {
-            return menu1.getSort() - menu2.getSort();
+            return (menu1.getSort() == null ? 0 : menu1.getSort()) - (menu2.getSort() == null ? 0 : menu2.getSort());
         }).collect(Collectors.toList());
-        return null;
+        return collect;
     }
 
     private List<CategoryEntity> getChildren(CategoryEntity root, List<CategoryEntity> list) {
@@ -51,7 +51,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
             menu.setChildren(getChildren(menu, list));
             return menu;
         }).sorted((menu1, menu2) -> {
-            return menu1.getSort() - menu2.getSort();
+            return (menu1.getSort()==null?0:menu1.getSort()) - (menu2.getSort()==null?0:menu2.getSort());
         }).collect(Collectors.toList());
         return collect;
     }
