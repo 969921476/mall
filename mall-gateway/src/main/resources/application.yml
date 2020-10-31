@@ -5,8 +5,8 @@ spring:
         server-addr: 127.0.0.1:8848
     gateway:
       routes:
-        -id:  # 路由id值
-        uri:  # 需要跳转到的位置
+        -id: baidu # 路由id值
+        uri: www.baidu.com # 需要跳转到的位置
         predicates:
           -Query=url,baidu     # 匹配Url中存在baidu 则 跳转到 uri
   application:
