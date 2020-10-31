@@ -1,6 +1,7 @@
 package com.mall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,15 @@ import com.mall.common.utils.R;
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
+
+    /**
+     * 组装三级分类数据
+     */
+    @RequestMapping("/getList")
+    public R getList() {
+        List<CategoryEntity> category = categoryService.getList();
+        return R.ok().put("data",category);
+    }
 
     /**
      * 列表
