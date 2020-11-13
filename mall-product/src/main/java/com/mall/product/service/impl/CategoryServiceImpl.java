@@ -36,7 +36,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         List<CategoryEntity> categories = baseMapper.selectList(null);
 
         // 组成树形结构
-        // 将获取的集合转换成stream流过滤ParentCid等于0的进行返回，并映射该项的children属性 并进行排序
+        // 将获取的集合转换成stream流过滤ParentCid等于0的进行返回，并映射该项的children属性 并进行排序 map 返回一个新的集合
         List<CategoryEntity> collect = categories.stream().filter(item -> item.getParentCid() == 0).map(menu -> {
             menu.setChildren(getChildren(menu, categories));
             return menu;
