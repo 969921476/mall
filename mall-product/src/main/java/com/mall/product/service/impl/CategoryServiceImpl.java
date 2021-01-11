@@ -46,8 +46,15 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         return collect;
     }
 
+    @Override
+    public void removeMenuByIds(List<Long> asList) {
+        // 检测分类是否在商品中进行使用， 若存在不进行删除，若不存在则进行删除 TODO
+        baseMapper.deleteBatchIds(asList);
+    }
+
     private List<CategoryEntity> getChildren(CategoryEntity root, List<CategoryEntity> list) {
-        List<CategoryEntity> collect = list.stream().filter(item -> item.getParentCid() == root.getCatId()).map(menu -> {
+        // 注：该处equals中 不能使用 == 否则数据多的时候会出现缺少数据
+        List<CategoryEntity> collect = list.stream().filter(item -> item.getParentCid().equals(root.getCatId())).map(menu -> {
             menu.setChildren(getChildren(menu, list));
             return menu;
         }).sorted((menu1, menu2) -> {
