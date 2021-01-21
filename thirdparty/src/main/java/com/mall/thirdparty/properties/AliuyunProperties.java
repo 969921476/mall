@@ -12,7 +12,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class AliuyunProperties implements InitializingBean {
-    // 读取配置文件内容
+    /**
+     *  读取配置文件内容
+     */
     @Value("${aliyun.oss.endpoint}")
     private String endpoint;
 
