@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import com.mall.product.entity.CategoryEntity;
@@ -30,7 +31,7 @@ public class CategoryController {
     /**
      * 组装三级分类数据
      */
-    @GetMapping("/getList")
+    @GetMapping("/list/tree")
     public R getList() {
         List<CategoryEntity> category = categoryService.getList();
         return R.ok().put("data",category);
@@ -54,7 +55,7 @@ public class CategoryController {
     public R info(@PathVariable("catId") Long catId){
 		CategoryEntity category = categoryService.getById(catId);
 
-        return R.ok().put("category", category);
+        return R.ok().put("data", category);
     }
 
     /**
@@ -70,17 +71,25 @@ public class CategoryController {
     /**
      * 修改
      */
+    @Transactional
     @RequestMapping("/update")
     public R update(@RequestBody CategoryEntity category){
 		categoryService.updateById(category);
+		// 修改分类名是修改品牌分类关联 TODO
 
+        return R.ok();
+    }
+
+    @RequestMapping("/update/sort")
+    public R updateSort(@RequestBody CategoryEntity[] category){
+		categoryService.updateBatchById(Arrays.asList(category));
         return R.ok();
     }
 
     /**
      * 删除
      */
-    @DeleteMapping("/delete")
+    @RequestMapping("/delete")
     public R delete(@RequestBody Long[] catIds){
         // categoryService.removeByIds(Arrays.asList(catIds));
         categoryService.removeMenuByIds(Arrays.asList(catIds));
