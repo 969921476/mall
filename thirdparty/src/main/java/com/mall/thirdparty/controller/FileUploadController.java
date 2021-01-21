@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: ChenJunNan
@@ -14,7 +15,6 @@ import java.util.List;
  * @Date: create in 2021/1/13 14:31
  */
 @RestController
-@RequestMapping("/thirdparty")
 public class FileUploadController {
     @Autowired
     private FileUploadService fileUploadService;
@@ -29,5 +29,14 @@ public class FileUploadController {
     public R deleteFile(@RequestBody String[] urlList) {
         fileUploadService.deleteFile(urlList);
         return R.ok();
+    }
+
+    /**
+     * 获取签名参数，用于前端上传文件
+     */
+    @GetMapping("/oss/policy")
+    public R policy() {
+        Map<String, String> respMap = fileUploadService.policy();
+        return R.ok().put("data", respMap);
     }
 }
